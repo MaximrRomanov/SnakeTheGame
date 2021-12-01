@@ -1,6 +1,6 @@
 ﻿namespace SnakeTheGame
 {
-    enum Direction
+    public enum Direction
     {
         Up = 0,
         Down = 1,

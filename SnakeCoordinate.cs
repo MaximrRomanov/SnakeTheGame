@@ -1,6 +1,6 @@
 ﻿namespace SnakeTheGame
 {
-    class SnakeCoordinate
+    public class SnakeCoordinate
     {
         public int x, y;
 
