@@ -7,11 +7,12 @@ namespace SnakeTheGame
     {
         static void Main(string[] args)
         {
-            int height = Console.LargestWindowHeight;
+            // 
             int width = Console.LargestWindowWidth;
+            int height = Console.LargestWindowHeight;
             // 64*240
-            Game game = new Game(height,width);
-            TerminalView view = new TerminalView(game);
+            Game game = new Game((int)(height*0.75),(int)(width*0.75));
+            TerminalView view = new TerminalView(game.GameChanges, height, width);
             view.ReflectGameChanges();
             
             Console.ReadLine();
@@ -20,11 +21,11 @@ namespace SnakeTheGame
    public  class TerminalView
     {
         private readonly Queue<GameChangeItem> gameChangeItems = new Queue<GameChangeItem>();
-        public TerminalView(Game game)
+        public TerminalView(Queue<GameChangeItem> gameChangeItems, int height, int width)
         {
-            gameChangeItems = game.GameChanges;
-            Console.WindowHeight = game.height;
-            Console.WindowWidth =game.width;
+            this.gameChangeItems = gameChangeItems;
+            Console.WindowHeight = height;
+            Console.WindowWidth = width;
 
 
         }
@@ -32,7 +33,7 @@ namespace SnakeTheGame
         {
             foreach ( var change in gameChangeItems)
             {
-                Console.SetCursorPosition(change.SnakeCoordinate.x,change.SnakeCoordinate.y);
+                Console.SetCursorPosition(change.SnakeCoordinate.y,change.SnakeCoordinate.x);
                 if (change.GameChangeType == GameChangeType.WallAppear)
                 {
                     Console.WriteLine("#");
@@ -41,7 +42,7 @@ namespace SnakeTheGame
                 {
                     Console.WriteLine();                
                 }
-                if(change.GameChangeType == GameChangeType.SnakeDisappear)
+                if(change.GameChangeType == GameChangeType.SnakeAppear)
                 {
                     Console.WriteLine("@");
                 }

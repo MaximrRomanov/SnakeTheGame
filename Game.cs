@@ -12,8 +12,8 @@ namespace SnakeTheGame
         public readonly Queue<GameChangeItem> GameChanges = new Queue<GameChangeItem>();
       public  Game (int height, int  width)
         {
-            this.width = width;
             this.height = height;
+            this.width = width;
             gameField = new DotType[height, width]; // измерение 0, измерение 1
             InitGameField();
         }
@@ -65,6 +65,7 @@ namespace SnakeTheGame
         {
             foreach (var change in snake.Changes)
             {
+                
                 if(change.SnakeCoordinateChangeType == SnakeCoordinateChangeType.Add)
                 {
                     gameField[change.SnakeCoordinate.x, change.SnakeCoordinate.y] = DotType.Snake;
